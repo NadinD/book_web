@@ -30,7 +30,7 @@ def global_init(db_file):
     engine = sa.create_engine(conn_str, echo=False)
 
     # создаем фабрику подключений к нашей базе данных, которая будет работать с нужным нам движком
-    __factory = scoped_session(orm.sessionmaker(bind=engine))
+    __factory = orm.sessionmaker(bind=engine)
 
     from . import __all_models
 
