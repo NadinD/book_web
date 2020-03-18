@@ -1,0 +1,32 @@
+h1 {
+   color: #d22e3a
+}
+
+.title{
+
+   color: "yellow"
+}
+
+.text-block-2{
+padding-right: 200px;
+padding-top: 100px;
+padding-bottom: 100px;
+float:none;
+background-image: url('../img/library.png');
+
+   background-position: 50% 50%;
+   background-size:100%;
+   background-repeat: no-repeat;
+   background-attachment: scroll;
+
+   color: tan;
+   font-size: 1.5em;
+   line-height: 1.2em
+   font-weight:700;
+   text-align:right;
+   letter-spacing:1.2px;
+   text-indent:1em;
+}
+.fon-text{
+   color: tan;
+}

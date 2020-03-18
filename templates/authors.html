@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+Авторы
+{% endblock %}
+
+{% block content_title %}
+Авторы
+{% endblock %}
+{% block content %}
+
+{% for item in authors%}
+<div class="col-md6 border rounded">
+    <a href="{{url_for('author_detail', id=item.id)}}"><h5>{{item.name}} {{item.middlename}} {{item.surname}}</h5></a>
+</div>
+
+{% endfor %}
+{% endblock %}

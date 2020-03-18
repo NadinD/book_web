@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" xmlns:color="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css"
+          href={{url_for('static', filename='css/style.css' )}}>
+    <title>{% block title %} -Книжная полка
+        {% endblock %}</title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-light bg-light fixed-top">
+        <a class="navbar-brand " href="{{ url_for('index') }}"><h2>Книжная полка</h2></a>
+
+        <form class="form-inline " method="GET">
+            <div class="form-group">
+                <input class="form control mr-sm-2" type="text" maxlength="150" placeholder="Найти книгу, автора"
+                       name="q"
+                       value="{{request.args.get('q','')}}">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+            </div>
+
+        </form>
+
+        {% if current_user.is_authenticated %}
+        <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
+        {% else %}
+        <p>
+            <a class="btn btn-primary " href="/register">Зарегистрироваться</a>
+            <a class="btn btn-success" href="/login">Войти</a>
+        </p>
+        {% endif %}
+
+    </nav>
+
+
+    <div class="fon-text">
+        <div class="text-block-2">Книги -наши самые<br> мудрые друзья и самые <br> терпеливые учителя
+        </div>
+    </div>
+
+
+</header>
+<!-- Begin page content -->
+
+<div class="container-fluid">
+    <div><h1 align="center">
+        {% block content_title %}
+        {% endblock %}
+    </h1></div>
+    <div class="row">
+
+        <div class="col-lg-2 col-md-3 col-sm-12">
+            <nav class="nav flex-column bg-light" >
+                <a class="nav-item" href="{{ url_for('new_book')}}"><h2>Новинки</h2></a>
+                <a class="nav-item" href="{{ url_for('genre')}}"><h2>Жанры</h2></a>
+                <a class="nav-item" href="{{ url_for('author')}}"><h2>Авторы</h2></a>
+            </nav>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

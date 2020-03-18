@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+
+{% block title %}
+{{ book.title}}
+{% endblock %}
+
+{% block content_title %}
+{{ book.title}}
+{% endblock %}
+
+{% block content%}
+<div class="col-md6 border rounded">
+
+    <div class="genre">
+    {% for genre in book.genre %}
+    <a href="{{url_for('genre_detail', id=genre.id)}}"><span class="badge badge-primary">{{genre.name}} </span>
+    </a>
+
+    {% endfor %}
+</div>
+
+     <div>
+        Автор - {{book.author.name}} {{book.author.middlename}} {{book.author.surname}}
+    </div>
+   <div>
+        {{book.description}}
+    </div>
+
+
+
+    {% if current_user.is_authenticated and current_user == book.user %}
+    <div>
+        <a href="/book_edit/{{ book.id }}" class="btn btn-warning">Изменить</a>
+        <a href="/book_delete/{{ book.id }}" class="btn btn-danger">Удалить</a>
+    </div>
+{% endif %}
+
+</div>
+
+
+{% endblock %}

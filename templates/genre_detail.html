@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+
+{% block title %}
+Жанр - {{ genre.name}}
+{% endblock %}
+
+{% block content_title %}
+Жанр - {{ genre.name}}:
+{% endblock %}
+
+{% block content%}
+
+{% for book in books %}
+<div class="books">
+    <a href="{{url_for('book', id=book.id)}}">{{book.title}} </a> {{book.author}}
+</div>
+
+
+{% endfor %}
+
+
+{% endblock %}
