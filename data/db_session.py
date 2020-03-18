@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 import sqlalchemy.orm as orm
-from sqlalchemy.orm import Session, scoped_session
+from sqlalchemy.orm import Session
 import sqlalchemy.ext.declarative as dec
 
 SqlAlchemyBase = dec.declarative_base()
@@ -40,4 +40,4 @@ def global_init(db_file):
 # нужна для получения сессии подключения к нашей базе данных
 def create_session():
     global __factory
-    return Session( __factory())
+    return  __factory()
