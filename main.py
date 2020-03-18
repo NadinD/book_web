@@ -14,6 +14,7 @@ from data.genres import Genres
 from data.users import Users
 
 app = Flask(__name__)
+db_session.global_init("db/bookshelf.sqlite")
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -266,7 +267,7 @@ def book_delete(id):
 
 
 def main():
-    db_session.global_init("db/bookshelf.sqlite")
+   
     app.run(port=8000, debug=True)
 
     # book.title = "Родосский треугольник"
