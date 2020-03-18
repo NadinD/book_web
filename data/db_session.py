@@ -40,4 +40,4 @@ def global_init(db_file):
 # нужна для получения сессии подключения к нашей базе данных
 def create_session():
     global __factory
-    return __factory()
+    return Session( __factory())
