@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request, make_response, sess
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user  # , current_user
 from werkzeug.exceptions import abort
 
+import data
 from data import db_session
 from data.AuthorForm import AuthorForm
 from data.BookForm import BookForm
@@ -24,7 +25,6 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 @app.route("/")
 def index():
     session = db_session.create_session()
-
     # q- строка с поисковым запросом
     q = request.args.get('q')
     # возвращаем посты
@@ -51,8 +51,8 @@ def reqister():
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Пароли не совпадают")
-        session = db_session.create_session()
-        if session.query(Users).filter(Users.email == form.email.data).first():
+        session1 = db_session.create_session()
+        if session1.query(Users).filter(Users.email == form.email.data).first():
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
@@ -62,8 +62,8 @@ def reqister():
 
         )
         user.set_password(form.password.data)
-        session.add(user)
-        session.commit()
+        session1.add(user)
+        session1.commit()
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
 
