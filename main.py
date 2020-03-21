@@ -156,6 +156,7 @@ def author_detail(id):
     return render_template('author_detail.html', books=books, author=author)
 
 
+# добавить автора
 @app.route('/author_edit', methods=['GET', 'POST'])
 @login_required
 def add_author():
@@ -187,7 +188,7 @@ def book(id):
 def add_book():
     session = db_session.create_session()
     form = BookForm()
-    form.genres.choices = [(x.id, x.name) for x in session.query(Genres).all()]
+    form.genres.choices = [(x.id, x.name) for x in session.query(Genres).order_by(Genres.name.asc())]
     form.fio.choices = [(x.id, x.name + ' ' + x.middlename + ' ' + x.surname) for x in
                         session.query(Authors).order_by(Authors.name.asc(), Authors.middlename.asc(),
                                                         Authors.surname.asc())]
@@ -213,12 +214,13 @@ def add_book():
                            form=form)
 
 
+# редактировать книгу по ее id
 @app.route('/book_edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_book(id):
     session = db_session.create_session()
     form = BookForm()
-    form.genres.choices = [(x.id, x.name) for x in session.query(Genres).all()]
+    form.genres.choices = [(x.id, x.name) for x in session.query(Genres).order_by(Genres.name.asc())]
     form.fio.choices = [(x.id, x.name + ' ' + x.middlename + ' ' + x.surname) for x in
                         session.query(Authors).order_by(Authors.name.asc(), Authors.middlename.asc(),
                                                         Authors.surname.asc())]
@@ -252,6 +254,7 @@ def edit_book(id):
     return render_template('book_edit.html', title='Редактирование книги', form=form)
 
 
+# удалить книгу по ее id
 @app.route('/book_delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def book_delete(id):
